@@ -1,11 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using PreçoBaixo.DataBase;
+using PreçoBaixo.Repository;
+using PreçoBaixo.Repository.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
 builder.Services.AddDbContext<Context>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

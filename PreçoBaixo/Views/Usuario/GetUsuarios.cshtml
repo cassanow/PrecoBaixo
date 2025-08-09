@@ -1,0 +1,28 @@
+﻿@model IList<Usuarios>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Email</th>
+        <th scope="col">DataCadastro</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var usuario in Model)
+    {
+        <tr>
+            <th scope="row">1</th>
+            <td>@usuario.Id</td>
+            <td>@usuario.Nome</td>
+            <td>@usuario.DataCadastro</td>
+        </tr>
+    }
+    </tbody>
+</table>
