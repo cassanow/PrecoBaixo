@@ -4,10 +4,10 @@ namespace PreçoBaixo.DTO;
 
 public class LoginDTO
 {
-    [Required]
-    [EmailAddress]
+    [Required(ErrorMessage = "O email é obrigatório")]
+    [EmailAddress(ErrorMessage = "Digite um email válido")]
     public string Email { get; set; }
     
-    [Required]
+    [Required(ErrorMessage = "A senha é obrigatória")]
     public string Senha { get; set; }
 }

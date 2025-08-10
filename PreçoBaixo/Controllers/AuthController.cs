@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using PreçoBaixo.DTO;
 using PreçoBaixo.Models;
 using PreçoBaixo.Repository.Interface;
@@ -57,6 +58,7 @@ public class AuthController : Controller
             return RedirectToAction("GetUsuarios", "Usuario");
         }
         
+        ModelState.AddModelError(string.Empty, "Usuário ou senha incorretos");
         return View(usuario);
     }
 

@@ -9,14 +9,17 @@
     <div class="mb-3">
         <label asp-for="Nome" for="exampleInputEmail1" class="form-label">Nome</label>
         <input asp-for="Nome" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <span asp-validation-for="Nome" class="text-danger"></span>
     </div>
     <div class="mb-3">
         <label asp-for="Email" for="exampleInputPassword1" class="form-label">Email</label>
         <input asp-for="Email" type="email" class="form-control" id="exampleInputPassword1">
+        <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div class="mb-3">
         <label asp-for="Senha" for="exampleInputPassword1" class="form-label">Senha</label>
         <input asp-for="Senha" type="password" class="form-control" id="exampleInputPassword1">
+        <span asp-validation-for="Senha" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Registrar</button>
 </form>
