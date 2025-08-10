@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PreçoBaixo.Models;
 using PreçoBaixo.Repository.Interface;
 
@@ -13,42 +14,15 @@ public class UsuarioController : Controller
         _usuarioRepository = usuarioRepository;
     }
     
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult> GetUsuarios()
     {
         var usuarios = await _usuarioRepository.Listar();
         return View(usuarios);
     }
-
-    [HttpGet]
-    public IActionResult AddUsuario()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> AddUsuario(Usuarios usuario)
-    {
-        if (!ModelState.IsValid)
-        {
-            foreach (var erro in ModelState.Values.SelectMany(v => v.Errors))
-            {
-                Console.WriteLine(erro.ErrorMessage);
-            }
-
-            return View(usuario);
-        }
-        
-        if (ModelState.IsValid && !await _usuarioRepository.UsuarioExiste(usuario.Id))
-        {
-            await _usuarioRepository.AddUsuario(usuario);
-            return RedirectToAction("Index", "Home");
-        }
-        
-        return View(usuario);
-    }
-
+    
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult> EditUsuario(int id)
     {
@@ -56,17 +30,18 @@ public class UsuarioController : Controller
 
         if (usuario == null)
         {
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Auth");
         }
 
         if (!await _usuarioRepository.UsuarioExiste(usuario.Id))
         {
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Auth");
         }
         
         return View(usuario);
     }
 
+    [Authorize]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> EditUsuario(Usuarios usuario)
@@ -74,11 +49,12 @@ public class UsuarioController : Controller
         if (ModelState.IsValid)
         {
             await _usuarioRepository.EditUsuario(usuario);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Auth");
         }
         return View(usuario);
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> DeleteUsuario(int id)
     {
@@ -87,10 +63,10 @@ public class UsuarioController : Controller
         if (await _usuarioRepository.UsuarioExiste(usuario.Id))
         {
             await _usuarioRepository.DeleteUsuario(usuario);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Auth");
         }
         
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Index", "Auth");
     }
     
 }

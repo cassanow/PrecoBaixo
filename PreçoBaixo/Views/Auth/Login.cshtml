@@ -1,0 +1,18 @@
+﻿@model Usuarios
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<form asp-action="Login" asp-controller="Auth" method="post">
+    <div class="mb-3">
+        <label asp-for="Email" for="exampleInputEmail1" class="form-label">Email</label>
+        <input asp-for="Email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label asp-for="Senha" for="exampleInputPassword1" class="form-label">Senha</label>
+        <input asp-for="Senha" type="password" class="form-control" id="exampleInputPassword1">
+    </div>
+    <button type="submit" class="btn btn-primary">Confirmar</button>
+</form>
